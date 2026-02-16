@@ -40,6 +40,10 @@ CSS custom properties defined in `src/index.css`. Dark-only theme.
 - **Layout:** `--container-width: 1200px`, `--section-padding: 120px`
 - **Breakpoints:** 968px (tablet grid collapse), 768px (mobile nav/layout), 480px (stacked buttons)
 
+## Workflow
+
+- **Always commit and push after each code change.** Do not wait for the user to ask — every modification should be committed and pushed immediately.
+
 ## Conventions
 
 - **CSS:** BEM naming (`.block__element--modifier`), one CSS file per component, co-located with its JSX
