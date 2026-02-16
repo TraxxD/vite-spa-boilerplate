@@ -1,0 +1,117 @@
+.timeline {
+  background: var(--bg-primary);
+}
+
+.timeline__track {
+  position: relative;
+  margin-top: 4rem;
+  padding: 2rem 0;
+}
+
+.timeline__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent);
+  transform: translateX(-50%);
+}
+
+.timeline__item {
+  position: relative;
+  display: flex;
+  margin-bottom: 3rem;
+  width: 50%;
+}
+
+.timeline__item--left {
+  justify-content: flex-end;
+  padding-right: 3rem;
+}
+
+.timeline__item--right {
+  margin-left: 50%;
+  padding-left: 3rem;
+}
+
+.timeline__dot {
+  position: absolute;
+  top: 1.5rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--bg-primary);
+  z-index: 1;
+}
+
+.timeline__item--left .timeline__dot {
+  right: -7px;
+}
+
+.timeline__item--right .timeline__dot {
+  left: -7px;
+}
+
+.timeline__card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 400px;
+  transition: all var(--transition-base);
+}
+
+.timeline__card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.timeline__year {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.timeline__card-title {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--white);
+  margin: 0.5rem 0;
+}
+
+.timeline__card-desc {
+  font-size: 0.9rem;
+  color: var(--white-50);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .timeline__line {
+    left: 20px;
+  }
+
+  .timeline__item,
+  .timeline__item--left,
+  .timeline__item--right {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 3.5rem;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+
+  .timeline__item--left .timeline__dot,
+  .timeline__item--right .timeline__dot {
+    left: 13px;
+    right: auto;
+  }
+
+  .timeline__card {
+    max-width: 100%;
+  }
+}

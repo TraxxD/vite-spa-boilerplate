@@ -1,0 +1,44 @@
+.banner {
+  position: relative;
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.banner__bg {
+  position: absolute;
+  inset: -20% 0;
+  z-index: 0;
+}
+
+.banner__accent {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.banner__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.banner__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--white);
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+}
+
+.banner__subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: var(--white-50);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
