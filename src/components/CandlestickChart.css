@@ -1,0 +1,86 @@
+.candlestick {
+  background: var(--bg-primary);
+}
+
+.candlestick__card {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.candlestick__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0 0.5rem;
+}
+
+.candlestick__pair {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.candlestick__symbol {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.candlestick__slash {
+  color: var(--white-20);
+  font-size: 1rem;
+}
+
+.candlestick__quote {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--white-50);
+}
+
+.candlestick__intervals {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  padding: 3px;
+}
+
+.candlestick__interval {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  color: var(--white-50);
+  transition: all var(--transition-fast);
+}
+
+.candlestick__interval:hover {
+  color: var(--white-70);
+}
+
+.candlestick__interval--active {
+  background: var(--gold);
+  color: var(--bg-primary);
+}
+
+.candlestick__chart {
+  height: 420px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .candlestick__chart {
+    height: 300px;
+  }
+
+  .candlestick__card {
+    padding: 1rem;
+  }
+}

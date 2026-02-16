@@ -4,6 +4,7 @@ import './Navbar.css'
 const navLinks = [
   { label: 'Explore', target: 'features' },
   { label: 'Markets', target: 'dashboard' },
+  { label: 'Trading', target: 'candlestick' },
   { label: 'Calculator', target: 'calculator' },
   { label: 'Timeline', target: 'timeline' },
 ]

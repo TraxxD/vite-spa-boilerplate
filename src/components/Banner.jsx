@@ -19,14 +19,15 @@ export default function Banner({ variant = 'gold', title, subtitle }) {
     target: ref,
     offset: ['start end', 'end start'],
   })
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.5, 1, 1, 0.5])
 
   const style = variants[variant]
 
   return (
     <section className="banner" ref={ref}>
       <motion.div className="banner__bg" style={{ y, background: style.gradient }} />
-      <div className="banner__accent" style={{ background: style.accent }} />
+      <motion.div className="banner__accent" style={{ opacity, background: style.accent }} />
       <div className="banner__content container">
         <motion.h2
           className="banner__title"

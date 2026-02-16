@@ -2,9 +2,10 @@
 :root {
   /* Colors */
   --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
+  --bg-secondary: #0d0d0d;
   --bg-tertiary: #1a1a1a;
-  --bg-card: #141414;
+  --bg-card: rgba(20, 20, 20, 0.6);
+  --bg-glass: rgba(255, 255, 255, 0.03);
   --gold: #F7931A;
   --gold-light: #f9a94b;
   --gold-dark: #c4750f;
@@ -15,13 +16,17 @@
   --white-20: rgba(255, 255, 255, 0.2);
   --white-10: rgba(255, 255, 255, 0.1);
   --white-05: rgba(255, 255, 255, 0.05);
-  --green: #22c55e;
-  --red: #ef4444;
-  --border: rgba(255, 255, 255, 0.08);
+  --green: #00d672;
+  --green-dim: rgba(0, 214, 114, 0.15);
+  --red: #ff3b3b;
+  --red-dim: rgba(255, 59, 59, 0.15);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-glass: rgba(255, 255, 255, 0.08);
 
   /* Typography */
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Spacing */
   --section-padding: 120px;
@@ -34,8 +39,14 @@
   --transition-slow: 0.6s ease;
 
   /* Z-index layers */
+  --z-cursor: 9999;
   --z-navbar: 1000;
   --z-overlay: 500;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(20px);
 }
 
 /* ===== Reset ===== */
@@ -61,6 +72,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  cursor: none;
+}
+
+/* Restore default cursor on interactive elements for accessibility */
+a, button, input, select, textarea, [role="button"] {
+  cursor: none;
 }
 
 img, svg {
@@ -75,7 +92,7 @@ a {
 
 button {
   font-family: inherit;
-  cursor: pointer;
+  cursor: none;
   border: none;
   background: none;
   color: inherit;
@@ -94,14 +111,14 @@ ul, ol {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-weight: 600;
   line-height: 1.2;
 }
 
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -109,12 +126,43 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--white-20);
-  border-radius: 4px;
+  background: var(--white-10);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--white-50);
+  background: var(--white-20);
+}
+
+/* ===== Grid Texture Background ===== */
+.grid-bg {
+  position: relative;
+}
+
+.grid-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Glassmorphism Card ===== */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
 }
 
 /* ===== Utility Classes ===== */
@@ -130,24 +178,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-label {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 1rem;
+  opacity: 0.9;
 }
 
 .section-title {
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3.5rem);
   color: var(--white);
   margin-bottom: 1.5rem;
+  font-weight: 700;
 }
 
 .section-subtitle {
   font-family: var(--font-sans);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--white-50);
   max-width: 600px;
   line-height: 1.7;
@@ -157,8 +208,30 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--gold);
 }
 
+.mono {
+  font-family: var(--font-mono);
+}
+
 /* ===== Selection ===== */
 ::selection {
   background: var(--gold);
   color: var(--bg-primary);
+}
+
+/* ===== Pulse Animations ===== */
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 214, 114, 0.4); }
+  50% { box-shadow: 0 0 12px 4px rgba(0, 214, 114, 0.15); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.4); }
+  50% { box-shadow: 0 0 12px 4px rgba(255, 59, 59, 0.15); }
+}
+
+/* ===== Mobile: disable custom cursor ===== */
+@media (max-width: 768px), (pointer: coarse) {
+  body, a, button, input, select, textarea, [role="button"] {
+    cursor: auto;
+  }
 }

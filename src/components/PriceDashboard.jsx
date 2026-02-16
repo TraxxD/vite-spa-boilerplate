@@ -30,7 +30,7 @@ export default function PriceDashboard({ currentPrice, change24h, historicalPric
   ]
 
   return (
-    <section className="dashboard section" id="dashboard">
+    <section className="dashboard section grid-bg" id="dashboard">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -38,12 +38,12 @@ export default function PriceDashboard({ currentPrice, change24h, historicalPric
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">Live Market Data</span>
+          <span className="section-label">// live_market_data</span>
           <h2 className="section-title">Price Dashboard</h2>
         </motion.div>
 
         <motion.div
-          className="dashboard__card"
+          className="dashboard__card glass-card"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

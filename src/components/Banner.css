@@ -10,7 +10,7 @@
 
 .banner__bg {
   position: absolute;
-  inset: -20% 0;
+  inset: -30% 0;
   z-index: 0;
 }
 
@@ -27,6 +27,7 @@
 }
 
 .banner__title {
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   color: var(--white);
@@ -36,7 +37,7 @@
 
 .banner__subtitle {
   font-family: var(--font-sans);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--white-50);
   max-width: 600px;
   margin: 0 auto;

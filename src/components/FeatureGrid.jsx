@@ -64,10 +64,17 @@ const cardVariants = {
 
 export default function FeatureGrid() {
   return (
-    <section className="features section" id="features">
+    <section className="features section grid-bg" id="features">
       <div className="container">
-        <span className="section-label">Why Bitcoin</span>
-        <h2 className="section-title">Built Different</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="section-label">// why_bitcoin</span>
+          <h2 className="section-title">Built Different</h2>
+        </motion.div>
         <div className="features__grid">
           {features.map((feature, i) => (
             <motion.div

@@ -16,6 +16,7 @@
   width: 2px;
   background: linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent);
   transform: translateX(-50%);
+  transform-origin: top center;
 }
 
 .timeline__item {
@@ -44,6 +45,7 @@
   background: var(--gold);
   border: 3px solid var(--bg-primary);
   z-index: 1;
+  box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.2);
 }
 
 .timeline__item--left .timeline__dot {
@@ -55,29 +57,44 @@
 }
 
 .timeline__card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
   padding: 1.5rem;
   max-width: 400px;
   transition: all var(--transition-base);
 }
 
 .timeline__card:hover {
-  border-color: var(--gold);
+  border-color: rgba(247, 147, 26, 0.3);
   transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(247, 147, 26, 0.06);
+}
+
+.timeline__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
 
 .timeline__year {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 0.1em;
 }
 
+.timeline__price {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--green);
+  background: var(--green-dim);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
 .timeline__card-title {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--white);

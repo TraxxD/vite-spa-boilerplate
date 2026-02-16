@@ -24,7 +24,7 @@ const resources = [
 
 export default function Resources() {
   return (
-    <section className="resources section" id="resources">
+    <section className="resources section grid-bg" id="resources">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -32,7 +32,7 @@ export default function Resources() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">Get Started</span>
+          <span className="section-label">// get_started</span>
           <h2 className="section-title">Resources</h2>
         </motion.div>
 

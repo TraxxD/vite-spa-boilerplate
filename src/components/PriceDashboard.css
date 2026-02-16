@@ -3,8 +3,10 @@
 }
 
 .dashboard__card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
   padding: 2rem;
   margin-top: 3rem;
@@ -26,15 +28,15 @@
 }
 
 .dashboard__price {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 2rem;
   font-weight: 700;
   color: var(--white);
 }
 
 .dashboard__change {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
   font-weight: 600;
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
@@ -42,24 +44,25 @@
 
 .dashboard__change--up {
   color: var(--green);
-  background: rgba(34, 197, 94, 0.1);
+  background: var(--green-dim);
 }
 
 .dashboard__change--down {
   color: var(--red);
-  background: rgba(239, 68, 68, 0.1);
+  background: var(--red-dim);
 }
 
 .dashboard__ranges {
   display: flex;
   gap: 0.25rem;
-  background: var(--bg-tertiary);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 8px;
   padding: 4px;
 }
 
 .dashboard__range-btn {
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: 600;
   padding: 0.4rem 1rem;
   border-radius: 6px;
@@ -84,8 +87,10 @@
 }
 
 .dashboard__stat {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-left: 3px solid var(--gold);
   border-radius: 12px;
   padding: 1.5rem;
@@ -95,16 +100,17 @@
 }
 
 .dashboard__stat-label {
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
   font-weight: 500;
   color: var(--white-50);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .dashboard__stat-value {
-  font-family: var(--font-sans);
-  font-size: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--white);
 }

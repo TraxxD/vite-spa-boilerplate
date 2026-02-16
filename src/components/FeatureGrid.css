@@ -10,15 +10,17 @@
 }
 
 .features__card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
   padding: 2rem;
   transition: all var(--transition-base);
 }
 
 .features__card:hover {
-  border-color: var(--gold);
+  border-color: rgba(247, 147, 26, 0.3);
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(247, 147, 26, 0.08);
 }
@@ -31,7 +33,7 @@
 }
 
 .features__card-title {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--white);

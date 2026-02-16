@@ -5,16 +5,19 @@ import Hero from './components/Hero'
 import FeatureGrid from './components/FeatureGrid'
 import Banner from './components/Banner'
 import PriceDashboard from './components/PriceDashboard'
+import CandlestickChart from './components/CandlestickChart'
 import InvestmentCalculator from './components/InvestmentCalculator'
 import Timeline from './components/Timeline'
 import Resources from './components/Resources'
 import Footer from './components/Footer'
+import BitcoinCursor from './components/BitcoinCursor'
 import NotFound from './pages/NotFound'
 import './App.css'
 
 function MainPage({ data }) {
   return (
     <div className="app">
+      <BitcoinCursor />
       <Navbar />
       <Hero currentPrice={data.currentPrice} change24h={data.change24h} />
       <FeatureGrid />
@@ -29,6 +32,7 @@ function MainPage({ data }) {
         historicalPrices={data.historicalPrices}
         marketData={data.marketData}
       />
+      <CandlestickChart historicalPrices={data.historicalPrices} />
       <InvestmentCalculator
         currentPrice={data.currentPrice}
         getPriceAtDate={data.getPriceAtDate}

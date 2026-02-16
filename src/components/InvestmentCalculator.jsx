@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import confetti from 'canvas-confetti'
 import './InvestmentCalculator.css'
 
 const presets = [
@@ -21,6 +22,24 @@ function formatInputDate(yearsAgo) {
   const d = new Date()
   d.setFullYear(d.getFullYear() - yearsAgo)
   return d.toISOString().split('T')[0]
+}
+
+function fireConfetti() {
+  const defaults = {
+    colors: ['#F7931A', '#f9a94b', '#00d672', '#ffffff'],
+    spread: 80,
+    ticks: 100,
+    gravity: 0.8,
+    scalar: 1.2,
+    shapes: ['circle', 'square'],
+  }
+
+  confetti({ ...defaults, particleCount: 40, origin: { x: 0.3, y: 0.6 } })
+  confetti({ ...defaults, particleCount: 40, origin: { x: 0.7, y: 0.6 } })
+
+  setTimeout(() => {
+    confetti({ ...defaults, particleCount: 25, origin: { x: 0.5, y: 0.5 }, spread: 120 })
+  }, 150)
 }
 
 export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
@@ -58,6 +77,11 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
         currentValue,
         gain,
       })
+
+      // Fire confetti on positive gains
+      if (gain > 0) {
+        fireConfetti()
+      }
     } else {
       setResult({ error: true })
     }
@@ -65,7 +89,7 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
   }
 
   return (
-    <section className="calculator section" id="calculator">
+    <section className="calculator section grid-bg" id="calculator">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -73,7 +97,7 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">Time Machine</span>
+          <span className="section-label">// time_machine</span>
           <h2 className="section-title">What If You Invested?</h2>
           <p className="section-subtitle">
             See how your investment would have grown over time.
@@ -81,7 +105,7 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
         </motion.div>
 
         <motion.div
-          className="calculator__card"
+          className="calculator__card glass-card"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -155,26 +179,26 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
               >
                 <div className="calculator__result-row">
                   <span className="calculator__result-label">You invested</span>
-                  <span className="calculator__result-value">${result.invested.toLocaleString()}</span>
+                  <span className="calculator__result-value mono">${result.invested.toLocaleString()}</span>
                 </div>
                 <div className="calculator__result-row">
                   <span className="calculator__result-label">BTC price then</span>
-                  <span className="calculator__result-value">${result.pastPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+                  <span className="calculator__result-value mono">${result.pastPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
                 </div>
                 <div className="calculator__result-row">
                   <span className="calculator__result-label">BTC purchased</span>
-                  <span className="calculator__result-value">{result.btcBought.toFixed(6)} BTC</span>
+                  <span className="calculator__result-value mono">{result.btcBought.toFixed(6)} BTC</span>
                 </div>
                 <div className="calculator__result-divider" />
                 <div className="calculator__result-row calculator__result-row--highlight">
                   <span className="calculator__result-label">Current value</span>
-                  <span className="calculator__result-value calculator__result-value--gold">
+                  <span className="calculator__result-value calculator__result-value--gold mono">
                     ${result.currentValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                   </span>
                 </div>
                 <div className="calculator__result-row">
                   <span className="calculator__result-label">Return</span>
-                  <span className={`calculator__result-value ${result.gain >= 0 ? 'calculator__result-value--green' : 'calculator__result-value--red'}`}>
+                  <span className={`calculator__result-value mono ${result.gain >= 0 ? 'calculator__result-value--green' : 'calculator__result-value--red'}`}>
                     {result.gain >= 0 ? '+' : ''}{result.gain.toFixed(1)}%
                   </span>
                 </div>
