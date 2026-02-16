@@ -68,6 +68,17 @@
   color: var(--bg-primary);
 }
 
+.candlestick__error {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--red);
+  background: var(--red-dim);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
 .candlestick__chart {
   height: 420px;
   width: 100%;

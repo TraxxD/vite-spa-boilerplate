@@ -32,7 +32,7 @@ function MainPage({ data }) {
         historicalPrices={data.historicalPrices}
         marketData={data.marketData}
       />
-      <CandlestickChart historicalPrices={data.historicalPrices} />
+      <CandlestickChart />
       <InvestmentCalculator
         currentPrice={data.currentPrice}
         getPriceAtDate={data.getPriceAtDate}

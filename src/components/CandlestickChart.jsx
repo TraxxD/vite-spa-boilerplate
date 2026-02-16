@@ -1,46 +1,107 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { createChart, CandlestickSeries } from 'lightweight-charts'
 import { motion } from 'framer-motion'
+import axios from 'axios'
 import './CandlestickChart.css'
 
-// Generate OHLC data from price points
-function generateOHLC(prices, interval) {
-  if (!prices || prices.length === 0) return []
+const COINGECKO_BASE = 'https://api.coingecko.com/api/v3'
 
-  const bucketMs = {
-    '1H': 3600000,
-    '4H': 4 * 3600000,
-    '1D': 86400000,
-    '1W': 7 * 86400000,
-  }
-  const ms = bucketMs[interval] || 86400000
-  const buckets = new Map()
+const ranges = [
+  { label: '7D', days: 7 },
+  { label: '30D', days: 30 },
+  { label: '90D', days: 90 },
+  { label: '180D', days: 180 },
+  { label: '1Y', days: 365 },
+]
 
-  prices.forEach((p) => {
-    const t = new Date(p.date).getTime()
-    const bucket = Math.floor(t / ms) * ms
-    if (!buckets.has(bucket)) {
-      buckets.set(bucket, { time: bucket / 1000, open: p.price, high: p.price, low: p.price, close: p.price })
-    } else {
-      const b = buckets.get(bucket)
-      b.high = Math.max(b.high, p.price)
-      b.low = Math.min(b.low, p.price)
-      b.close = p.price
+function getOhlcCache(days) {
+  try {
+    const raw = sessionStorage.getItem(`btc_ohlc_${days}`)
+    if (!raw) return null
+    const { data, expiry } = JSON.parse(raw)
+    if (Date.now() > expiry) {
+      sessionStorage.removeItem(`btc_ohlc_${days}`)
+      return null
     }
-  })
-
-  return Array.from(buckets.values()).sort((a, b) => a.time - b.time)
+    return data
+  } catch {
+    return null
+  }
 }
 
-const intervals = ['1D', '1W']
+function setOhlcCache(days, data) {
+  try {
+    // Cache for 15 minutes
+    sessionStorage.setItem(
+      `btc_ohlc_${days}`,
+      JSON.stringify({ data, expiry: Date.now() + 900000 })
+    )
+  } catch {
+    // storage full
+  }
+}
 
-export default function CandlestickChart({ historicalPrices }) {
+export default function CandlestickChart() {
   const chartContainerRef = useRef(null)
   const chartRef = useRef(null)
   const seriesRef = useRef(null)
-  const [interval, setInterval] = useState('1D')
+  const [activeRange, setActiveRange] = useState('30D')
+  const [ohlcData, setOhlcData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [fetchError, setFetchError] = useState(false)
 
-  // Initialize chart
+  const fetchOHLC = useCallback(async (days) => {
+    const cached = getOhlcCache(days)
+    if (cached) {
+      setOhlcData(cached)
+      setLoading(false)
+      setFetchError(false)
+      return
+    }
+
+    setLoading(true)
+    setFetchError(false)
+
+    try {
+      const { data } = await axios.get(`${COINGECKO_BASE}/coins/bitcoin/ohlc`, {
+        params: { vs_currency: 'usd', days },
+      })
+
+      // CoinGecko returns [[timestamp, open, high, low, close], ...]
+      // lightweight-charts needs { time (unix seconds), open, high, low, close }
+      // For daily candles we need to deduplicate by day
+      const dayMap = new Map()
+      data.forEach(([timestamp, open, high, low, close]) => {
+        const dayKey = Math.floor(timestamp / 86400000) * 86400
+        if (!dayMap.has(dayKey)) {
+          dayMap.set(dayKey, { time: dayKey, open, high, low, close })
+        } else {
+          const existing = dayMap.get(dayKey)
+          existing.high = Math.max(existing.high, high)
+          existing.low = Math.min(existing.low, low)
+          existing.close = close
+        }
+      })
+
+      const candles = Array.from(dayMap.values()).sort((a, b) => a.time - b.time)
+
+      setOhlcData(candles)
+      setOhlcCache(days, candles)
+      setFetchError(false)
+    } catch (err) {
+      console.error('Failed to fetch OHLC data:', err)
+      setFetchError(true)
+    }
+    setLoading(false)
+  }, [])
+
+  // Fetch data when range changes
+  useEffect(() => {
+    const range = ranges.find((r) => r.label === activeRange)
+    if (range) fetchOHLC(range.days)
+  }, [activeRange, fetchOHLC])
+
+  // Initialize chart once
   useEffect(() => {
     if (!chartContainerRef.current) return
 
@@ -65,8 +126,7 @@ export default function CandlestickChart({ historicalPrices }) {
       },
       timeScale: {
         borderVisible: false,
-        timeVisible: true,
-        secondsVisible: false,
+        timeVisible: false,
       },
       handleScroll: { vertTouchDrag: false },
     })
@@ -83,11 +143,12 @@ export default function CandlestickChart({ historicalPrices }) {
     chartRef.current = chart
     seriesRef.current = series
 
+    const el = chartContainerRef.current
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect
       chart.applyOptions({ width, height })
     })
-    resizeObserver.observe(chartContainerRef.current)
+    resizeObserver.observe(el)
 
     return () => {
       resizeObserver.disconnect()
@@ -95,13 +156,12 @@ export default function CandlestickChart({ historicalPrices }) {
     }
   }, [])
 
-  // Update data when prices or interval changes
+  // Update chart data
   useEffect(() => {
-    if (!seriesRef.current || !historicalPrices) return
-    const ohlc = generateOHLC(historicalPrices, interval)
-    seriesRef.current.setData(ohlc)
+    if (!seriesRef.current || ohlcData.length === 0) return
+    seriesRef.current.setData(ohlcData)
     chartRef.current?.timeScale().fitContent()
-  }, [historicalPrices, interval])
+  }, [ohlcData])
 
   return (
     <section className="candlestick section grid-bg" id="candlestick">
@@ -130,18 +190,29 @@ export default function CandlestickChart({ historicalPrices }) {
               <span className="candlestick__quote">USD</span>
             </div>
             <div className="candlestick__intervals">
-              {intervals.map((iv) => (
+              {ranges.map((r) => (
                 <button
-                  key={iv}
-                  className={`candlestick__interval ${interval === iv ? 'candlestick__interval--active' : ''}`}
-                  onClick={() => setInterval(iv)}
+                  key={r.label}
+                  className={`candlestick__interval ${activeRange === r.label ? 'candlestick__interval--active' : ''}`}
+                  onClick={() => setActiveRange(r.label)}
                 >
-                  {iv}
+                  {r.label}
                 </button>
               ))}
             </div>
           </div>
-          <div className="candlestick__chart" ref={chartContainerRef} />
+
+          {fetchError && (
+            <div className="candlestick__error">
+              Failed to load chart data. CoinGecko API may be rate-limited — try again in a moment.
+            </div>
+          )}
+
+          <div
+            className="candlestick__chart"
+            ref={chartContainerRef}
+            style={{ opacity: loading ? 0.3 : 1, transition: 'opacity 0.3s ease' }}
+          />
         </motion.div>
       </div>
     </section>
