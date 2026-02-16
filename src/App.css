@@ -5,6 +5,17 @@
   text-align: center;
 }
 
+nav {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+nav a {
+  font-size: 1.1em;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
