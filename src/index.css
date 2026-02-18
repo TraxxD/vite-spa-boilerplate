@@ -18,16 +18,16 @@
   --color-border-subtle: rgba(255, 255, 255, 0.04);
   --color-focus-ring: rgba(247, 147, 26, 0.5);
 
-  /* ── Fluid Type Scale (1.2 ratio, scaled for 1920px desktop) ── */
-  --text-xs: clamp(0.6rem, 0.57rem + 0.1vw, 0.65rem);
-  --text-sm: clamp(0.7rem, 0.66rem + 0.12vw, 0.775rem);
-  --text-base: clamp(0.835rem, 0.8rem + 0.15vw, 0.925rem);
-  --text-lg: clamp(1rem, 0.94rem + 0.25vw, 1.1rem);
-  --text-xl: clamp(1.2rem, 1.1rem + 0.35vw, 1.35rem);
-  --text-2xl: clamp(1.45rem, 1.28rem + 0.55vw, 1.7rem);
-  --text-3xl: clamp(1.8rem, 1.5rem + 0.9vw, 2.15rem);
-  --text-4xl: clamp(2.2rem, 1.8rem + 1.3vw, 2.65rem);
-  --text-5xl: clamp(2.75rem, 2.15rem + 1.8vw, 3.75rem);
+  /* ── Fluid Type Scale (1.25 ratio) ── */
+  --text-xs: clamp(0.64rem, 0.6rem + 0.15vw, 0.72rem);
+  --text-sm: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.25rem, 1.15rem + 0.4vw, 1.4rem);
+  --text-xl: clamp(1.563rem, 1.4rem + 0.6vw, 1.75rem);
+  --text-2xl: clamp(1.953rem, 1.7rem + 0.9vw, 2.2rem);
+  --text-3xl: clamp(2.441rem, 2rem + 1.4vw, 2.75rem);
+  --text-4xl: clamp(3.052rem, 2.4rem + 2vw, 3.5rem);
+  --text-5xl: clamp(3.815rem, 3rem + 2.8vw, 5rem);
 
   /* ── Line Heights ── */
   --leading-tight: 1.1;
@@ -35,20 +35,20 @@
   --leading-normal: 1.5;
   --leading-relaxed: 1.7;
 
-  /* ── Spacing Scale (compact) ── */
-  --space-1: 0.25rem;    /* 4px */
-  --space-2: 0.5rem;     /* 8px */
-  --space-3: 0.625rem;   /* 10px */
-  --space-4: 0.875rem;   /* 14px */
-  --space-5: 1rem;       /* 16px */
-  --space-6: 1.25rem;    /* 20px */
-  --space-8: 1.5rem;     /* 24px */
-  --space-10: 2rem;      /* 32px */
-  --space-12: 2.25rem;   /* 36px */
-  --space-16: 3rem;      /* 48px */
-  --space-20: 3.75rem;   /* 60px */
-  --space-24: 4.5rem;    /* 72px */
-  --space-32: 5.5rem;    /* 88px */
+  /* ── 8px-base Spacing Scale ── */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
 
   /* ── Typography ── */
   --font-heading: 'Space Grotesk', system-ui, sans-serif;
@@ -134,6 +134,7 @@
 }
 
 html {
+  font-size: 85%;
   scroll-behavior: smooth;
   background-color: var(--color-bg-primary);
   color-scheme: dark;
