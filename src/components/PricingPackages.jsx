@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import MagneticButton from './MagneticButton'
 import './PricingPackages.css'
 
@@ -55,6 +56,35 @@ const cardVariants = {
 }
 
 export default function PricingPackages() {
+  const [modalPkg, setModalPkg] = useState(null)
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+
+  const openModal = (pkg) => {
+    setModalPkg(pkg)
+    setEmail('')
+    setSubmitted(false)
+    setError('')
+  }
+
+  const closeModal = () => {
+    setModalPkg(null)
+    setEmail('')
+    setSubmitted(false)
+    setError('')
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Please enter a valid email address.')
+      return
+    }
+    setError('')
+    setSubmitted(true)
+  }
+
   return (
     <section className="pricing section grid-bg" id="pricing">
       <div className="container">
@@ -108,13 +138,87 @@ export default function PricingPackages() {
                   </li>
                 ))}
               </ul>
-              <MagneticButton className={`pricing__cta ${pkg.featured ? 'pricing__cta--gold' : ''}`}>
+              <MagneticButton
+                className={`pricing__cta ${pkg.featured ? 'pricing__cta--gold' : ''}`}
+                onClick={() => openModal(pkg)}
+              >
                 Get Started
               </MagneticButton>
             </motion.div>
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {modalPkg && (
+          <motion.div
+            className="pricing__overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeModal}
+          >
+            <motion.div
+              className="pricing__modal glass-card"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {!submitted ? (
+                <>
+                  <button className="pricing__modal-close" onClick={closeModal}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <h3 className="pricing__modal-title">
+                    Sign up for <span className="gold-text">{modalPkg.name}</span>
+                  </h3>
+                  <p className="pricing__modal-price">
+                    <span className="mono">${modalPkg.price}</span> one-time payment
+                  </p>
+                  <form className="pricing__modal-form" onSubmit={handleSubmit}>
+                    <label className="pricing__modal-label" htmlFor="signup-email">
+                      Email Address
+                    </label>
+                    <input
+                      id="signup-email"
+                      className="pricing__modal-input"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      autoFocus
+                    />
+                    {error && <p className="pricing__modal-error">{error}</p>}
+                    <button type="submit" className="pricing__modal-submit">
+                      Sign Up Now
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <div className="pricing__modal-success">
+                  <div className="pricing__modal-success-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="24" cy="24" r="20" />
+                      <path d="M14 24l7 7 13-13" />
+                    </svg>
+                  </div>
+                  <h3 className="pricing__modal-title">You're all set!</h3>
+                  <p className="pricing__modal-desc">
+                    Successfully signed up for the <strong>{modalPkg.name}</strong> package. We'll get back to you at <strong>{email}</strong> with your course access details.
+                  </p>
+                  <button className="pricing__modal-submit" onClick={closeModal}>
+                    Done
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

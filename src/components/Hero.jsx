@@ -71,6 +71,12 @@ export default function Hero({ currentPrice, change24h }) {
             >
               Calculate Returns
             </MagneticButton>
+            <MagneticButton
+              className="hero__cta hero__cta--outline"
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Our Courses
+            </MagneticButton>
           </div>
         </motion.div>
 
