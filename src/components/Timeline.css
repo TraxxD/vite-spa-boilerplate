@@ -1,11 +1,11 @@
 .timeline {
-  background: var(--bg-primary);
+  background: var(--color-bg-section);
 }
 
 .timeline__track {
   position: relative;
-  margin-top: 4rem;
-  padding: 2rem 0;
+  margin-top: var(--space-16);
+  padding: var(--space-8) 0;
 }
 
 .timeline__line {
@@ -14,36 +14,38 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent);
+  background: linear-gradient(to bottom, transparent, var(--color-accent), var(--color-accent), transparent);
   transform: translateX(-50%);
+  transform-origin: top center;
 }
 
 .timeline__item {
   position: relative;
   display: flex;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-12);
   width: 50%;
 }
 
 .timeline__item--left {
   justify-content: flex-end;
-  padding-right: 3rem;
+  padding-right: var(--space-12);
 }
 
 .timeline__item--right {
   margin-left: 50%;
-  padding-left: 3rem;
+  padding-left: var(--space-12);
 }
 
 .timeline__dot {
   position: absolute;
-  top: 1.5rem;
+  top: var(--space-6);
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--gold);
-  border: 3px solid var(--bg-primary);
+  background: var(--color-accent);
+  border: 3px solid var(--color-bg-primary);
   z-index: 1;
+  box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.2);
 }
 
 .timeline__item--left .timeline__dot {
@@ -55,39 +57,95 @@
 }
 
 .timeline__card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
   max-width: 400px;
   transition: all var(--transition-base);
 }
 
 .timeline__card:hover {
-  border-color: var(--gold);
+  border-color: rgba(247, 147, 26, 0.3);
   transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(247, 147, 26, 0.06);
+}
+
+.timeline__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
 }
 
 .timeline__year {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
   font-weight: 700;
-  color: var(--gold);
+  color: var(--color-accent);
   letter-spacing: 0.1em;
 }
 
+.timeline__price {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-green);
+  background: var(--color-green-dim);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
 .timeline__card-title {
-  font-family: var(--font-sans);
-  font-size: 1.15rem;
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
   font-weight: 600;
-  color: var(--white);
-  margin: 0.5rem 0;
+  color: var(--color-text-primary);
+  margin: var(--space-2) 0;
 }
 
 .timeline__card-desc {
-  font-size: 0.9rem;
-  color: var(--white-50);
-  line-height: 1.7;
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  line-height: var(--leading-relaxed);
+}
+
+.timeline__conclusion {
+  text-align: center;
+  margin-top: var(--space-12);
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--color-border);
+}
+
+.timeline__conclusion-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin: 0 auto var(--space-6);
+  line-height: var(--leading-relaxed);
+}
+
+.timeline__conclusion-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-8);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline__conclusion-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(247, 147, 26, 0.4);
 }
 
 @media (max-width: 768px) {
@@ -100,7 +158,7 @@
   .timeline__item--right {
     width: 100%;
     margin-left: 0;
-    padding-left: 3.5rem;
+    padding-left: var(--space-12);
     padding-right: 0;
     justify-content: flex-start;
   }

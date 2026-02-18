@@ -1,61 +1,77 @@
 .resources {
-  background: var(--bg-secondary);
+  background: var(--color-bg-section);
 }
 
 .resources__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
+  gap: var(--space-6);
+  margin-top: var(--space-12);
 }
 
 .resources__card {
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
   transition: all var(--transition-base);
 }
 
 .resources__card:hover {
-  border-color: var(--gold);
+  border-color: rgba(247, 147, 26, 0.3);
   transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(247, 147, 26, 0.06);
 }
 
 .resources__card-title {
-  font-family: var(--font-sans);
-  font-size: 1.25rem;
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
   font-weight: 600;
-  color: var(--white);
-  margin-bottom: 0.75rem;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
 }
 
 .resources__card-desc {
-  font-size: 0.9rem;
-  color: var(--white-50);
-  line-height: 1.7;
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  line-height: var(--leading-relaxed);
   flex: 1;
 }
 
 .resources__cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--gold);
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  position: relative;
   transition: gap var(--transition-fast);
 }
 
-.resources__card:hover .resources__cta {
-  gap: 0.75rem;
+/* Underline slide-in animation */
+.resources__cta::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width var(--transition-base);
 }
 
-.resources__cta svg {
-  display: inline;
+.resources__card:hover .resources__cta {
+  gap: var(--space-3);
+}
+
+.resources__card:hover .resources__cta::after {
+  width: 100%;
 }
 
 @media (max-width: 768px) {

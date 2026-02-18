@@ -10,7 +10,7 @@
 
 .banner__bg {
   position: absolute;
-  inset: -20% 0;
+  inset: -30% 0;
   z-index: 0;
 }
 
@@ -27,18 +27,59 @@
 }
 
 .banner__title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
   font-weight: 700;
-  color: var(--white);
+  color: var(--color-text-primary);
   max-width: 800px;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto var(--space-6);
+  line-height: var(--leading-snug);
 }
 
 .banner__subtitle {
   font-family: var(--font-sans);
-  font-size: 1.1rem;
-  color: var(--white-50);
+  font-size: var(--text-base);
+  color: var(--color-text-tertiary);
   max-width: 600px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: var(--leading-relaxed);
+}
+
+.banner__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-8);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.banner__cta:hover {
+  transform: translateY(-2px);
+}
+
+.banner__cta--gold {
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+  box-shadow: 0 4px 24px rgba(247, 147, 26, 0.3);
+}
+
+.banner__cta--gold:hover {
+  box-shadow: 0 8px 32px rgba(247, 147, 26, 0.45);
+}
+
+.banner__cta--purple {
+  background: #8b5cf6;
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.3);
+}
+
+.banner__cta--purple:hover {
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.45);
 }

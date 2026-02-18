@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import confetti from 'canvas-confetti'
 import './InvestmentCalculator.css'
 
 const presets = [
@@ -21,6 +22,24 @@ function formatInputDate(yearsAgo) {
   const d = new Date()
   d.setFullYear(d.getFullYear() - yearsAgo)
   return d.toISOString().split('T')[0]
+}
+
+function fireConfetti() {
+  const defaults = {
+    colors: ['#F7931A', '#f9a94b', '#00d672', '#ffffff'],
+    spread: 80,
+    ticks: 100,
+    gravity: 0.8,
+    scalar: 1.2,
+    shapes: ['circle', 'square'],
+  }
+
+  confetti({ ...defaults, particleCount: 40, origin: { x: 0.3, y: 0.6 } })
+  confetti({ ...defaults, particleCount: 40, origin: { x: 0.7, y: 0.6 } })
+
+  setTimeout(() => {
+    confetti({ ...defaults, particleCount: 25, origin: { x: 0.5, y: 0.5 }, spread: 120 })
+  }, 150)
 }
 
 export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
@@ -58,6 +77,10 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
         currentValue,
         gain,
       })
+
+      if (gain > 0) {
+        fireConfetti()
+      }
     } else {
       setResult({ error: true })
     }
@@ -65,34 +88,35 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
   }
 
   return (
-    <section className="calculator section" id="calculator">
+    <section className="calculator section" id="calculator" aria-labelledby="calculator-heading">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <span className="section-label">Time Machine</span>
-          <h2 className="section-title">What If You Invested?</h2>
+          <span className="section-label">// time_machine</span>
+          <h2 className="section-title" id="calculator-heading">What If You Invested?</h2>
           <p className="section-subtitle">
-            See how your investment would have grown over time.
+            This calculator shows the life-changing gains you could have made. The question isn't whether Bitcoin will keep growing — it's whether you'll be ready when it does.
           </p>
         </motion.div>
 
         <motion.div
           className="calculator__card"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
         >
           <div className="calculator__inputs">
             <div className="calculator__field">
-              <label className="calculator__label">Investment Amount</label>
+              <label className="calculator__label" htmlFor="calc-amount">Investment Amount</label>
               <div className="calculator__input-wrapper">
                 <span className="calculator__currency">$</span>
                 <input
+                  id="calc-amount"
                   type="number"
                   className="calculator__input"
                   value={amount}
@@ -120,8 +144,9 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
                 ))}
               </div>
               <div className="calculator__custom-date">
-                <span className="calculator__or">or pick a date</span>
+                <label className="calculator__or" htmlFor="calc-custom-date">or pick a date</label>
                 <input
+                  id="calc-custom-date"
                   type="date"
                   className="calculator__date-input"
                   value={customDate}
@@ -152,31 +177,49 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.4 }}
+                role="status"
               >
                 <div className="calculator__result-row">
                   <span className="calculator__result-label">You invested</span>
-                  <span className="calculator__result-value">${result.invested.toLocaleString()}</span>
+                  <span className="calculator__result-value mono tabular-nums">${result.invested.toLocaleString()}</span>
                 </div>
                 <div className="calculator__result-row">
                   <span className="calculator__result-label">BTC price then</span>
-                  <span className="calculator__result-value">${result.pastPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+                  <span className="calculator__result-value mono tabular-nums">${result.pastPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
                 </div>
                 <div className="calculator__result-row">
                   <span className="calculator__result-label">BTC purchased</span>
-                  <span className="calculator__result-value">{result.btcBought.toFixed(6)} BTC</span>
+                  <span className="calculator__result-value mono tabular-nums">{result.btcBought.toFixed(6)} BTC</span>
                 </div>
                 <div className="calculator__result-divider" />
                 <div className="calculator__result-row calculator__result-row--highlight">
                   <span className="calculator__result-label">Current value</span>
-                  <span className="calculator__result-value calculator__result-value--gold">
+                  <span className="calculator__result-value calculator__result-value--gold mono tabular-nums">
                     ${result.currentValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                   </span>
                 </div>
                 <div className="calculator__result-row">
                   <span className="calculator__result-label">Return</span>
-                  <span className={`calculator__result-value ${result.gain >= 0 ? 'calculator__result-value--green' : 'calculator__result-value--red'}`}>
+                  <span className={`calculator__result-value mono tabular-nums ${result.gain >= 0 ? 'calculator__result-value--green' : 'calculator__result-value--red'}`}>
                     {result.gain >= 0 ? '+' : ''}{result.gain.toFixed(1)}%
                   </span>
+                </div>
+                <div className="calculator__result-cta">
+                  <p className="calculator__result-cta-text">
+                    {result.gain > 0
+                      ? "Imagine catching the next move like this. Learn to spot opportunities before they happen."
+                      : "Markets move in cycles. Learn when to buy, hold, and take profit."
+                    }
+                  </p>
+                  <button
+                    className="calculator__result-cta-btn"
+                    onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    Learn to Trade with Confidence
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                      <path d="M3 8h10M9 4l4 4-4 4" />
+                    </svg>
+                  </button>
                 </div>
               </motion.div>
             )}
@@ -186,6 +229,7 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                role="alert"
               >
                 Could not fetch price data for that date. Try a different date.
               </motion.div>

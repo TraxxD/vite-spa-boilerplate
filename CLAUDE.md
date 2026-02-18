@@ -21,11 +21,11 @@ npm run preview  # Preview production build locally
 
 ### Routing
 
-React Router DOM v7 with two routes: `"/"` renders MainPage (all 9 scrolling sections), `"*"` renders NotFound. Navigation within the page uses smooth-scroll to section IDs, not route changes.
+React Router DOM v7 with two routes: `"/"` renders MainPage (all scrolling sections), `"*"` renders NotFound. Navigation within the page uses smooth-scroll to section IDs, not route changes.
 
 ### Component Layout (top to bottom on page)
 
-Navbar → Hero (with 3D coin) → FeatureGrid → Banner(gold) → PriceDashboard (with PriceChart) → InvestmentCalculator → Banner(purple) → Timeline → Resources → Footer
+BitcoinCursor → Navbar → Hero (with 3D coin) → FeatureGrid → Banner(gold) → PriceDashboard (with PriceChart) → CandlestickChart → InvestmentCalculator → Banner(purple) → Timeline → Resources → Footer
 
 ### 3D Coin (BitcoinCoin3D.jsx)
 
@@ -33,12 +33,23 @@ Uses React Three Fiber + Three.js. Textures are generated programmatically via C
 
 ## Design System
 
-CSS custom properties defined in `src/index.css`. Dark-only theme.
+CSS custom properties defined in `src/index.css`. Dark-only theme. Bloomberg terminal meets crypto aesthetic.
 
 - **Colors:** `--bg-primary: #0a0a0a`, `--gold: #F7931A` (accent), `--green/#red` for price changes
-- **Typography:** `--font-serif: Playfair Display` (headings), `--font-sans: Inter` (body) — loaded from Google Fonts in index.html
+- **Typography:** `--font-heading: Space Grotesk` (headings), `--font-sans: Inter` (body), `--font-mono: JetBrains Mono` (data/numbers) — loaded from Google Fonts in index.html
+- **Glassmorphism:** `.glass-card` utility class — `backdrop-filter: blur(20px)`, semi-transparent bg + border
+- **Grid texture:** `.grid-bg` utility class — faint 60px grid overlay via `::before` pseudo-element
 - **Layout:** `--container-width: 1200px`, `--section-padding: 120px`
 - **Breakpoints:** 968px (tablet grid collapse), 768px (mobile nav/layout), 480px (stacked buttons)
+
+## Key Libraries
+
+- **Three.js / R3F / Drei** — 3D Bitcoin coin in Hero
+- **GSAP + ScrollTrigger** — Timeline scroll animations (line growth + card reveals)
+- **Framer Motion** — Section entry animations, parallax banners
+- **lightweight-charts** — TradingView candlestick chart
+- **canvas-confetti** — Celebration effect on positive investment calculator results
+- **Chart.js + react-chartjs-2** — Price line chart in dashboard
 
 ## Workflow
 
@@ -47,6 +58,9 @@ CSS custom properties defined in `src/index.css`. Dark-only theme.
 ## Conventions
 
 - **CSS:** BEM naming (`.block__element--modifier`), one CSS file per component, co-located with its JSX
-- **Animations:** Framer Motion `whileInView` with `viewport={{ once: true }}` for scroll-triggered entry animations
+- **Animations:** Framer Motion `whileInView` with `viewport={{ once: true }}` for scroll-triggered entry animations; GSAP ScrollTrigger for timeline
+- **Section labels:** Monospace code-comment style (`// section_name`)
+- **Custom cursor:** BitcoinCursor component — gold dot + trailing ring, hidden on touch devices
+- **Magnetic buttons:** MagneticButton component wraps buttons with mouse-follow offset effect
 - **State:** React hooks only (no external state library). All Bitcoin data centralized in the custom hook
 - **API dates:** CoinGecko expects `dd-mm-yyyy`; HTML date inputs produce `yyyy-mm-dd` — conversion happens in InvestmentCalculator
