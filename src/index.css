@@ -139,12 +139,6 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-/* ===== Force all sections above particle canvas ===== */
-.section,
-section {
-  position: relative;
-  z-index: 2;
-}
 
 /* ===== Glassmorphism Card ===== */
 .glass-card {

@@ -1,8 +1,6 @@
 .footer {
   padding: 4rem 0 2rem;
   background: #0a0a0a;
-  position: relative;
-  z-index: 2;
 }
 
 .footer__separator {
