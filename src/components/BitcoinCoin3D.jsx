@@ -180,7 +180,7 @@ function Scene({ dragging, dragRotation }) {
   const { scene } = useThree()
 
   useEffect(() => {
-    scene.background = new THREE.Color('#111328')
+    scene.background = null
   }, [scene])
 
   return (
@@ -239,7 +239,8 @@ export default function BitcoinCoin3D() {
     >
       <Canvas
         camera={{ position: [0, 0, 7], fov: 40 }}
-        gl={{ antialias: true }}
+        gl={{ antialias: true, alpha: true }}
+        style={{ background: 'transparent' }}
       >
         <Scene dragging={dragging} dragRotation={dragRotation} />
       </Canvas>
