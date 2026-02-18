@@ -1,5 +1,5 @@
 .features {
-  background: var(--bg-secondary);
+  background: rgba(13, 13, 13, 0.85);
 }
 
 .features__grid {

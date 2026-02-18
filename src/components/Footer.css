@@ -1,6 +1,6 @@
 .footer {
   padding: 4rem 0 2rem;
-  background: var(--bg-primary);
+  background: rgba(10, 10, 10, 0.85);
 }
 
 .footer__separator {

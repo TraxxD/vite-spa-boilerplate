@@ -1,5 +1,5 @@
 .dashboard {
-  background: var(--bg-primary);
+  background: rgba(10, 10, 10, 0.85);
 }
 
 .dashboard__card {

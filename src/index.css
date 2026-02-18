@@ -58,7 +58,7 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--bg-primary);
+  background-color: #15182e;
   color-scheme: dark;
 }
 
@@ -67,7 +67,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: var(--white-90);
-  background-color: var(--bg-primary);
+  background-color: transparent;
   min-width: 320px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

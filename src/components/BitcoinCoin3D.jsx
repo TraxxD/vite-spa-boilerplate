@@ -180,7 +180,7 @@ function Scene({ dragging, dragRotation }) {
   const { scene } = useThree()
 
   useEffect(() => {
-    scene.background = new THREE.Color('#0a0a0a')
+    scene.background = new THREE.Color('#111328')
   }, [scene])
 
   return (

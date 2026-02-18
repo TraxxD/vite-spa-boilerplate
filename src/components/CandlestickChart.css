@@ -1,5 +1,5 @@
 .candlestick {
-  background: var(--bg-primary);
+  background: rgba(10, 10, 10, 0.85);
 }
 
 .candlestick__card {

@@ -6,7 +6,7 @@
   position: relative;
   padding-top: 80px;
   overflow: hidden;
-  background: var(--bg-primary);
+  background: rgba(10, 10, 10, 0.85);
 }
 
 .hero__inner {

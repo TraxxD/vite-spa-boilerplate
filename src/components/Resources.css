@@ -1,5 +1,5 @@
 .resources {
-  background: var(--bg-secondary);
+  background: rgba(13, 13, 13, 0.85);
 }
 
 .resources__grid {
