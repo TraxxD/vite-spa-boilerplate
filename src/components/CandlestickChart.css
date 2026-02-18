@@ -9,14 +9,19 @@
 }
 
 .candlestick__chart {
-  height: 600px;
+  height: 610px;
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
 }
 
+.candlestick__chart iframe {
+  height: 100% !important;
+  width: 100% !important;
+}
+
 @media (max-width: 768px) {
   .candlestick__chart {
-    height: 450px;
+    height: 480px;
   }
 }

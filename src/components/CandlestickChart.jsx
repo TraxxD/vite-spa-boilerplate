@@ -8,15 +8,20 @@ export default function CandlestickChart() {
   useEffect(() => {
     if (!containerRef.current) return
 
-    // Clear any previous widget
     containerRef.current.innerHTML = ''
+
+    const wrapper = document.createElement('div')
+    wrapper.className = 'tradingview-widget-container__widget'
+    wrapper.style.height = '100%'
+    wrapper.style.width = '100%'
 
     const script = document.createElement('script')
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js'
     script.type = 'text/javascript'
     script.async = true
     script.innerHTML = JSON.stringify({
-      autosize: true,
+      width: '100%',
+      height: '100%',
       symbol: 'BINANCE:BTCUSDT',
       interval: 'D',
       timezone: 'Etc/UTC',
@@ -27,13 +32,9 @@ export default function CandlestickChart() {
       gridColor: 'rgba(255, 255, 255, 0.03)',
       allow_symbol_change: true,
       calendar: false,
+      hide_volume: false,
       support_host: 'https://www.tradingview.com',
     })
-
-    const wrapper = document.createElement('div')
-    wrapper.className = 'tradingview-widget-container__widget'
-    wrapper.style.height = '100%'
-    wrapper.style.width = '100%'
 
     containerRef.current.appendChild(wrapper)
     containerRef.current.appendChild(script)
