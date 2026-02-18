@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import MagneticButton from './MagneticButton'
 import './PricingPackages.css'
@@ -55,11 +55,11 @@ const packages = [
 ]
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.2, duration: 0.7, ease: 'easeOut' },
+    transition: { delay: i * 0.2, duration: 0.5, ease: 'easeOut' },
   }),
 }
 
@@ -68,6 +68,8 @@ export default function PricingPackages() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
+  const modalRef = useRef(null)
+  const closeButtonRef = useRef(null)
 
   const openModal = (pkg) => {
     setModalPkg(pkg)
@@ -93,18 +95,57 @@ export default function PricingPackages() {
     setSubmitted(true)
   }
 
+  // Focus trap for modal
+  useEffect(() => {
+    if (!modalPkg) return
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        closeModal()
+        return
+      }
+
+      if (e.key !== 'Tab' || !modalRef.current) return
+
+      const focusableEls = modalRef.current.querySelectorAll(
+        'button, input, [href], [tabindex]:not([tabindex="-1"])'
+      )
+      const first = focusableEls[0]
+      const last = focusableEls[focusableEls.length - 1]
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    // Focus the close button when modal opens
+    setTimeout(() => closeButtonRef.current?.focus(), 50)
+
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [modalPkg])
+
   return (
-    <section className="pricing section grid-bg" id="pricing">
+    <section className="pricing section" id="pricing" aria-labelledby="pricing-heading">
       <div className="container">
         <motion.div
           className="pricing__header"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           <span className="section-label">// course_packages</span>
-          <h2 className="section-title">
+          <h2 className="section-title" id="pricing-heading">
             Invest in Your <span className="gold-text">Knowledge</span>
           </h2>
           <p className="section-subtitle">
@@ -114,7 +155,7 @@ export default function PricingPackages() {
 
         <div className="pricing__grid">
           {packages.map((pkg, i) => (
-            <motion.div
+            <motion.article
               key={pkg.name}
               className={`pricing__card pricing__card--${pkg.accent} ${pkg.featured ? 'pricing__card--featured' : ''}`}
               variants={cardVariants}
@@ -122,27 +163,28 @@ export default function PricingPackages() {
               whileInView="visible"
               viewport={{ once: true, margin: '-50px' }}
               custom={i}
+              aria-labelledby={`pricing-${pkg.accent}-name`}
             >
               {pkg.featured && <div className="pricing__badge">Most Popular</div>}
               <div className="pricing__card-header">
-                <span className="pricing__name">{pkg.name}</span>
+                <span className="pricing__name" id={`pricing-${pkg.accent}-name`}>{pkg.name}</span>
                 <span className="pricing__label">{pkg.label}</span>
               </div>
               <div className="pricing__price">
                 <span className="pricing__currency">$</span>
-                <span className="pricing__amount mono">{pkg.price}</span>
+                <span className="pricing__amount mono tabular-nums">{pkg.price}</span>
                 <span className="pricing__price-note">one-time access</span>
               </div>
               <div className="pricing__social-proof">
                 <svg className="pricing__users-icon" viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
                   <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                 </svg>
-                <span className="pricing__students">{pkg.students} students enrolled</span>
+                <span className="pricing__students tabular-nums">{pkg.students} students enrolled</span>
               </div>
               <ul className="pricing__features">
                 {pkg.features.map((feature, j) => (
                   <li key={j} className="pricing__feature">
-                    <svg className="pricing__check" viewBox="0 0 20 20" fill="currentColor">
+                    <svg className="pricing__check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -160,7 +202,7 @@ export default function PricingPackages() {
                 {pkg.ctaText}
               </MagneticButton>
               <span className="pricing__guarantee">30-day money-back guarantee</span>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>
@@ -173,9 +215,13 @@ export default function PricingPackages() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="pricing-modal-title"
           >
             <motion.div
-              className="pricing__modal glass-card"
+              className="pricing__modal"
+              ref={modalRef}
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -184,16 +230,21 @@ export default function PricingPackages() {
             >
               {!submitted ? (
                 <>
-                  <button className="pricing__modal-close" onClick={closeModal}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <button
+                    className="pricing__modal-close"
+                    onClick={closeModal}
+                    ref={closeButtonRef}
+                    aria-label="Close dialog"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                       <path d="M18 6L6 18M6 6l12 12" />
                     </svg>
                   </button>
-                  <h3 className="pricing__modal-title">
+                  <h3 className="pricing__modal-title" id="pricing-modal-title">
                     Sign up for <span className="gold-text">{modalPkg.name}</span>
                   </h3>
                   <p className="pricing__modal-price">
-                    <span className="mono">${modalPkg.price}</span> one-time payment
+                    <span className="mono tabular-nums">${modalPkg.price}</span> one-time payment
                   </p>
                   <form className="pricing__modal-form" onSubmit={handleSubmit}>
                     <label className="pricing__modal-label" htmlFor="signup-email">
@@ -208,16 +259,16 @@ export default function PricingPackages() {
                       onChange={(e) => setEmail(e.target.value)}
                       autoFocus
                     />
-                    {error && <p className="pricing__modal-error">{error}</p>}
+                    {error && <p className="pricing__modal-error" role="alert">{error}</p>}
                     <button type="submit" className="pricing__modal-submit">
                       Sign Up Now
                     </button>
                   </form>
                 </>
               ) : (
-                <div className="pricing__modal-success">
+                <div className="pricing__modal-success" role="status">
                   <div className="pricing__modal-success-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <circle cx="24" cy="24" r="20" />
                       <path d="M14 24l7 7 13-13" />
                     </svg>

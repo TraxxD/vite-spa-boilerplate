@@ -5,7 +5,21 @@ export default function BitcoinCursor() {
   const ringRef = useRef(null)
   const [hovering, setHovering] = useState(false)
 
+  // Detect touch device
+  const isTouch = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
+
   useEffect(() => {
+    if (isTouch) return
+
+    // Add custom-cursor-active class to body
+    document.body.classList.add('custom-cursor-active')
+    return () => {
+      document.body.classList.remove('custom-cursor-active')
+    }
+  }, [isTouch])
+
+  useEffect(() => {
+    if (isTouch) return
     const dot = dotRef.current
     const ring = ringRef.current
     if (!dot || !ring) return
@@ -44,12 +58,9 @@ export default function BitcoinCursor() {
       window.removeEventListener('mouseout', onOut)
       cancelAnimationFrame(raf)
     }
-  }, [hovering])
+  }, [hovering, isTouch])
 
-  // Don't render on touch devices
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
-    return null
-  }
+  if (isTouch) return null
 
   return (
     <>

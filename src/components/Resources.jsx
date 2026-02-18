@@ -24,16 +24,16 @@ const resources = [
 
 export default function Resources() {
   return (
-    <section className="resources section grid-bg" id="resources">
+    <section className="resources section" id="resources" aria-labelledby="resources-heading">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           <span className="section-label">// get_started</span>
-          <h2 className="section-title">Free Resources to Get You Started</h2>
+          <h2 className="section-title" id="resources-heading">Free Resources to Get You Started</h2>
           <p className="section-subtitle">
             Not ready to commit? Start with these free, trusted resources. When you're ready to go deeper, our courses are waiting.
           </p>
@@ -47,19 +47,21 @@ export default function Resources() {
               href={r.href}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <h3 className="resources__card-title">{r.title}</h3>
-              <p className="resources__card-desc">{r.description}</p>
-              <span className="resources__cta">
-                {r.cta}
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M3 8h10M9 4l4 4-4 4" />
-                </svg>
-              </span>
+              <article>
+                <h3 className="resources__card-title">{r.title}</h3>
+                <p className="resources__card-desc">{r.description}</p>
+                <span className="resources__cta">
+                  {r.cta}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" />
+                  </svg>
+                </span>
+              </article>
             </motion.a>
           ))}
         </div>

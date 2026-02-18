@@ -19,7 +19,6 @@ export default function Hero({ currentPrice, change24h }) {
   const [pulse, setPulse] = useState(false)
   const prevPrice = useRef(currentPrice)
 
-  // Trigger pulse animation when price changes
   useEffect(() => {
     if (currentPrice && prevPrice.current && currentPrice !== prevPrice.current) {
       setPulse(true)
@@ -31,7 +30,8 @@ export default function Hero({ currentPrice, change24h }) {
   }, [currentPrice])
 
   return (
-    <section className="hero grid-bg" id="hero">
+    <section className="hero" id="hero" aria-labelledby="hero-heading">
+      <div className="hero__grain" />
       <div className="hero__inner container">
         <motion.div
           className="hero__text"
@@ -40,10 +40,10 @@ export default function Hero({ currentPrice, change24h }) {
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <span className="section-label">// digital_gold_standard</span>
-          <h1 className="hero__title">
-            Don't Just Watch<br />History. <span className="gold-text">Own It.</span>
+          <h1 className="hero__title" id="hero-heading">
+            Don't Just Watch<br />History. <span className="hero__accent-bar">Own It.</span>
           </h1>
-          <div className="hero__price">
+          <div className="hero__price-pill" aria-live="polite">
             <span className={`hero__price-value mono ${pulse ? 'hero__price-value--pulse' : ''}`}>
               {currentPrice ? formatPrice(currentPrice) : '---'}
             </span>
@@ -86,6 +86,7 @@ export default function Hero({ currentPrice, change24h }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
         >
+          <div className="hero__coin-glow" />
           <BitcoinCoin3D />
         </motion.div>
       </div>
@@ -94,6 +95,7 @@ export default function Hero({ currentPrice, change24h }) {
         className="hero__scroll-indicator"
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
+        aria-hidden="true"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />

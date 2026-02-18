@@ -18,18 +18,18 @@ export default function CtaBanner() {
   }
 
   return (
-    <section className="cta-banner">
+    <section className="cta-banner" aria-labelledby="cta-banner-heading">
       <div className="cta-banner__glow" />
       <div className="container">
         <motion.div
           className="cta-banner__content"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
         >
           <span className="section-label">// don't_miss_out</span>
-          <h2 className="cta-banner__title">
+          <h2 className="cta-banner__title" id="cta-banner-heading">
             The Best Time to Learn Was Yesterday.<br />
             The Second Best Time Is <span className="gold-text">Now.</span>
           </h2>
@@ -39,8 +39,12 @@ export default function CtaBanner() {
 
           {!submitted ? (
             <form className="cta-banner__form" onSubmit={handleSubmit}>
+              <label htmlFor="cta-email" className="cta-banner__label">
+                Email Address
+              </label>
               <div className="cta-banner__input-group">
                 <input
+                  id="cta-email"
                   type="email"
                   className="cta-banner__input"
                   placeholder="Enter your email address"
@@ -51,7 +55,7 @@ export default function CtaBanner() {
                   Get Free Insights
                 </button>
               </div>
-              {error && <p className="cta-banner__error">{error}</p>}
+              {error && <p className="cta-banner__error" role="alert">{error}</p>}
               <p className="cta-banner__privacy">
                 Join 12,000+ subscribers. Unsubscribe anytime.
               </p>
@@ -59,11 +63,12 @@ export default function CtaBanner() {
           ) : (
             <motion.div
               className="cta-banner__success"
+              role="status"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
             >
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" width="36" height="36">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" width="36" height="36" aria-hidden="true">
                 <circle cx="24" cy="24" r="20" />
                 <path d="M14 24l7 7 13-13" />
               </svg>

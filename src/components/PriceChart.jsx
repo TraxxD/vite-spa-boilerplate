@@ -73,8 +73,8 @@ export default function PriceChart({ historicalPrices, range = '1Y' }) {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#1a1a1a',
-        borderColor: 'rgba(255,255,255,0.1)',
+        backgroundColor: '#1C1C21',
+        borderColor: 'rgba(255,255,255,0.08)',
         borderWidth: 1,
         titleColor: 'rgba(255,255,255,0.5)',
         bodyColor: '#F7931A',

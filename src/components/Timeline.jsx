@@ -53,8 +53,22 @@ export default function Timeline() {
   useEffect(() => {
     if (!trackRef.current || !lineRef.current) return
 
+    // Check prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReducedMotion) {
+      // Show everything instantly with no animations
+      if (lineRef.current) lineRef.current.style.transform = 'scaleY(1)'
+      cardsRef.current.forEach((card) => {
+        if (card) {
+          card.style.opacity = '1'
+          card.style.transform = 'none'
+        }
+      })
+      return
+    }
+
     const ctx = gsap.context(() => {
-      // Animate the gold line growing downward
       gsap.fromTo(
         lineRef.current,
         { scaleY: 0 },
@@ -70,7 +84,6 @@ export default function Timeline() {
         }
       )
 
-      // Animate each card
       cardsRef.current.forEach((card, i) => {
         if (!card) return
         const isLeft = i % 2 === 0
@@ -97,7 +110,6 @@ export default function Timeline() {
           }
         )
 
-        // Animate the dot
         const dot = card.querySelector('.timeline__dot')
         if (dot) {
           gsap.fromTo(
@@ -123,16 +135,16 @@ export default function Timeline() {
   }, [])
 
   return (
-    <section className="timeline section grid-bg" id="timeline">
+    <section className="timeline section" id="timeline" aria-labelledby="timeline-heading">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           <span className="section-label">// protocol_history</span>
-          <h2 className="section-title">The Bitcoin Journey</h2>
+          <h2 className="section-title" id="timeline-heading">The Bitcoin Journey</h2>
           <p className="section-subtitle">
             From $0 to $100,000+ in 15 years. Every milestone was called "too late" by skeptics. The next chapter is unwritten — will you be in it?
           </p>
@@ -141,30 +153,30 @@ export default function Timeline() {
         <div className="timeline__track" ref={trackRef}>
           <div className="timeline__line" ref={lineRef} />
           {milestones.map((m, i) => (
-            <div
+            <article
               key={m.year}
               className={`timeline__item ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}
               ref={(el) => (cardsRef.current[i] = el)}
             >
               <div className="timeline__dot" />
-              <div className="timeline__card glass-card">
+              <div className="timeline__card">
                 <div className="timeline__card-header">
                   <span className="timeline__year">{m.year}</span>
-                  <span className="timeline__price">{m.price}</span>
+                  <span className="timeline__price tabular-nums">{m.price}</span>
                 </div>
                 <h3 className="timeline__card-title">{m.title}</h3>
                 <p className="timeline__card-desc">{m.description}</p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
         <motion.div
           className="timeline__conclusion"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
         >
           <p className="timeline__conclusion-text">
             At every milestone, people said it was too late. They were wrong every single time.
@@ -174,7 +186,7 @@ export default function Timeline() {
             onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Don't Be Late This Time
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M4 9h10M10 5l4 4-4 4" />
             </svg>
           </button>

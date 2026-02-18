@@ -54,33 +54,33 @@ const features = [
 ]
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.6, ease: 'easeOut' },
+    transition: { delay: i * 0.15, duration: 0.5, ease: 'easeOut' },
   }),
 }
 
 export default function FeatureGrid() {
   return (
-    <section className="features section grid-bg" id="features">
+    <section className="features section" id="features" aria-labelledby="features-heading">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           <span className="section-label">// why_bitcoin</span>
-          <h2 className="section-title">Built Different</h2>
+          <h2 className="section-title" id="features-heading">Built Different</h2>
           <p className="section-subtitle">
             Every other asset can be printed, diluted, or seized. Bitcoin can't. Here's why the world's sharpest investors are paying attention.
           </p>
         </motion.div>
         <div className="features__grid">
           {features.map((feature, i) => (
-            <motion.div
+            <motion.article
               key={feature.title}
               className="features__card"
               variants={cardVariants}
@@ -89,10 +89,12 @@ export default function FeatureGrid() {
               viewport={{ once: true, margin: '-50px' }}
               custom={i}
             >
-              <div className="features__icon">{feature.icon}</div>
+              <div className="features__icon-container">
+                <div className="features__icon">{feature.icon}</div>
+              </div>
               <h3 className="features__card-title">{feature.title}</h3>
               <p className="features__card-desc">{feature.description}</p>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>
