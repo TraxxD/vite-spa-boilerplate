@@ -3,8 +3,8 @@
 }
 
 .candlestick__fullwidth {
-  width: 100%;
-  margin-top: 3rem;
+  width: 60%;
+  margin: 3rem auto 0;
 }
 
 .candlestick__card {
