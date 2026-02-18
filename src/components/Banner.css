@@ -1,7 +1,7 @@
 .banner {
   position: relative;
-  height: 60vh;
-  min-height: 400px;
+  height: auto;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,30 +28,30 @@
 
 .banner__title {
   font-family: var(--font-heading);
-  font-size: var(--text-4xl);
+  font-size: clamp(1.8rem, 3vw + 0.5rem, 2.75rem);
   font-weight: 700;
   color: var(--color-text-primary);
-  max-width: 800px;
-  margin: 0 auto var(--space-6);
-  line-height: var(--leading-snug);
+  max-width: 700px;
+  margin: 0 auto var(--space-4);
+  line-height: 1.2;
 }
 
 .banner__subtitle {
   font-family: var(--font-sans);
-  font-size: var(--text-base);
-  color: var(--color-text-tertiary);
-  max-width: 600px;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
   margin: 0 auto;
-  line-height: var(--leading-relaxed);
+  line-height: 1.6;
 }
 
 .banner__cta {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin-top: var(--space-8);
-  min-height: 48px;
-  padding: var(--space-3) var(--space-8);
+  margin-top: 1.25rem;
+  min-height: 44px;
+  padding: 10px 24px;
   font-family: var(--font-heading);
   font-size: var(--text-sm);
   font-weight: 600;

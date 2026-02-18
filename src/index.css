@@ -18,16 +18,16 @@
   --color-border-subtle: rgba(255, 255, 255, 0.04);
   --color-focus-ring: rgba(247, 147, 26, 0.5);
 
-  /* ── Fluid Type Scale (1.25 ratio) ── */
-  --text-xs: clamp(0.64rem, 0.6rem + 0.15vw, 0.72rem);
-  --text-sm: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
-  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --text-lg: clamp(1.25rem, 1.15rem + 0.4vw, 1.4rem);
-  --text-xl: clamp(1.563rem, 1.4rem + 0.6vw, 1.75rem);
-  --text-2xl: clamp(1.953rem, 1.7rem + 0.9vw, 2.2rem);
-  --text-3xl: clamp(2.441rem, 2rem + 1.4vw, 2.75rem);
-  --text-4xl: clamp(3.052rem, 2.4rem + 2vw, 3.5rem);
-  --text-5xl: clamp(3.815rem, 3rem + 2.8vw, 5rem);
+  /* ── Fluid Type Scale (density-optimized) ── */
+  --text-xs: 0.75rem;                                       /* 12px — captions, uppercase labels */
+  --text-sm: 0.875rem;                                      /* 14px — nav, labels, feature lists */
+  --text-base: clamp(0.9375rem, 0.5rem + 1vw, 1.125rem);   /* 15-18px — body text */
+  --text-lg: 1.05rem;                                       /* ~17px — card headings */
+  --text-xl: clamp(1.25rem, 0.5rem + 1.5vw, 1.5rem);       /* 20-24px — sub-headings */
+  --text-2xl: clamp(1.5rem, 0.5rem + 2vw, 2rem);            /* 24-32px */
+  --text-3xl: clamp(1.6rem, 0.5rem + 2.5vw, 2.25rem);       /* 26-36px — most section headings */
+  --text-4xl: clamp(1.8rem, 0.5rem + 3vw, 2.75rem);         /* 29-44px — banner/large headings */
+  --text-5xl: clamp(2.5rem, 0.5rem + 4vw, 4rem);            /* 40-64px — hero heading only */
 
   /* ── Line Heights ── */
   --leading-tight: 1.1;
@@ -57,9 +57,9 @@
 
   /* ── Layout ── */
   --max-reading-width: 72ch;
-  --container-width: 1400px;
-  --container-padding: var(--space-6);
-  --section-padding: var(--space-32);
+  --container-width: 1320px;
+  --container-padding: clamp(1.25rem, 4vw, 3rem);
+  --section-padding: clamp(3rem, 6vw, 5rem);
 
   /* ── Transitions ── */
   --transition-fast: 0.2s ease;
@@ -134,7 +134,7 @@
 }
 
 html {
-  font-size: 85%;
+  font-size: 100%;
   scroll-behavior: smooth;
   background-color: var(--color-bg-primary);
   color-scheme: dark;
@@ -305,11 +305,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: var(--text-4xl);
+  font-size: var(--text-3xl);
   color: var(--color-text-primary);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
   font-weight: 700;
-  line-height: var(--leading-tight);
+  line-height: var(--leading-snug);
 }
 
 .section-subtitle {

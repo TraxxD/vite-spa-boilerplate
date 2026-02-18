@@ -6,15 +6,15 @@
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-10);
-  margin-top: var(--space-12);
-  max-width: 700px;
+  padding: 2rem;
+  margin-top: var(--space-8);
+  max-width: 600px;
 }
 
 .calculator__inputs {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-5);
 }
 
 .calculator__field {
@@ -25,7 +25,7 @@
 
 .calculator__label {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-text-tertiary);
   text-transform: uppercase;
@@ -37,8 +37,9 @@
   align-items: center;
   background: var(--color-bg-input);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 0 var(--space-4);
+  border-radius: 10px;
+  padding: 0 14px;
+  height: 44px;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -57,9 +58,9 @@
 
 .calculator__input {
   width: 100%;
-  padding: var(--space-4) 0;
+  padding: 10px 0;
   font-family: var(--font-mono);
-  font-size: var(--text-lg);
+  font-size: 1rem;
   font-weight: 600;
   color: var(--color-text-primary);
   background: transparent;
@@ -207,7 +208,7 @@
 
 .calculator__result-value--gold {
   color: var(--color-accent);
-  font-size: var(--text-xl);
+  font-size: 1.5rem;
   font-weight: 700;
 }
 

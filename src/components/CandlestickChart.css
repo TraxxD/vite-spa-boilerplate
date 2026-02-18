@@ -3,8 +3,9 @@
 }
 
 .candlestick__fullwidth {
-  width: 60%;
-  margin: var(--space-12) auto 0;
+  max-width: 1000px;
+  width: 100%;
+  margin: var(--space-8) auto 0;
 }
 
 .candlestick__card {
@@ -44,23 +45,13 @@
 .candlestick__chart {
   display: block;
   width: 100%;
-  height: 700px;
+  height: 420px;
+  max-height: 50vh;
   border: none;
 }
 
-@media (max-width: 1024px) {
-  .candlestick__fullwidth {
-    width: 90%;
-  }
-}
-
 @media (max-width: 768px) {
-  .candlestick__fullwidth {
-    width: 100%;
-    padding: 0 var(--space-6);
-  }
-
   .candlestick__chart {
-    height: 500px;
+    height: 300px;
   }
 }
