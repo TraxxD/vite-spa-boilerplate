@@ -1,51 +1,7 @@
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import './CandlestickChart.css'
 
 export default function CandlestickChart() {
-  const containerRef = useRef(null)
-
-  useEffect(() => {
-    if (!containerRef.current) return
-
-    containerRef.current.innerHTML = ''
-
-    const wrapper = document.createElement('div')
-    wrapper.className = 'tradingview-widget-container__widget'
-    wrapper.style.height = '100%'
-    wrapper.style.width = '100%'
-
-    const script = document.createElement('script')
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js'
-    script.type = 'text/javascript'
-    script.async = true
-    script.innerHTML = JSON.stringify({
-      width: '100%',
-      height: '100%',
-      symbol: 'BINANCE:BTCUSDT',
-      interval: 'D',
-      timezone: 'Etc/UTC',
-      theme: 'dark',
-      style: '1',
-      locale: 'en',
-      backgroundColor: 'rgba(0, 0, 0, 0)',
-      gridColor: 'rgba(255, 255, 255, 0.03)',
-      allow_symbol_change: true,
-      calendar: false,
-      hide_volume: false,
-      support_host: 'https://www.tradingview.com',
-    })
-
-    containerRef.current.appendChild(wrapper)
-    containerRef.current.appendChild(script)
-
-    return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = ''
-      }
-    }
-  }, [])
-
   return (
     <section className="candlestick section" id="candlestick">
       <div className="container">
@@ -68,9 +24,13 @@ export default function CandlestickChart() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <div
-            className="tradingview-widget-container candlestick__chart"
-            ref={containerRef}
+          <iframe
+            className="candlestick__chart"
+            src="https://s.tradingview.com/widgetembed/?hideideas=1&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en#%7B%22symbol%22%3A%22BINANCE%3ABTCUSDT%22%2C%22frameElementId%22%3A%22tradingview_btc%22%2C%22interval%22%3A%22D%22%2C%22hide_side_toolbar%22%3A%220%22%2C%22allow_symbol_change%22%3A%221%22%2C%22calendar%22%3A%220%22%2C%22studies%22%3A%5B%5D%2C%22theme%22%3A%22dark%22%2C%22style%22%3A%221%22%2C%22timezone%22%3A%22Etc%2FUTC%22%2C%22withdateranges%22%3A%221%22%7D"
+            frameBorder="0"
+            allowTransparency="true"
+            allowFullScreen
+            title="TradingView BTCUSDT Chart"
           />
         </motion.div>
       </div>
