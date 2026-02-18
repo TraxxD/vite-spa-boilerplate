@@ -4,12 +4,12 @@ import './Banner.css'
 
 const variants = {
   gold: {
-    gradient: 'linear-gradient(135deg, rgba(12, 10, 6, 0.85) 0%, rgba(26, 18, 8, 0.7) 30%, rgba(12, 10, 6, 0.85) 70%, rgba(9, 9, 11, 0.85) 100%)',
-    accent: 'radial-gradient(ellipse at 50% 50%, rgba(247, 147, 26, 0.1) 0%, transparent 70%)',
+    gradient: 'linear-gradient(180deg, transparent 0%, rgba(26, 18, 8, 0.45) 20%, rgba(26, 18, 8, 0.55) 50%, rgba(26, 18, 8, 0.45) 80%, transparent 100%)',
+    accent: 'radial-gradient(ellipse at 50% 50%, rgba(247, 147, 26, 0.08) 0%, transparent 70%)',
   },
   purple: {
-    gradient: 'linear-gradient(135deg, rgba(9, 9, 14, 0.85) 0%, rgba(17, 13, 26, 0.7) 30%, rgba(9, 9, 14, 0.85) 70%, rgba(9, 9, 11, 0.85) 100%)',
-    accent: 'radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 70%)',
+    gradient: 'linear-gradient(180deg, transparent 0%, rgba(17, 13, 26, 0.45) 20%, rgba(17, 13, 26, 0.55) 50%, rgba(17, 13, 26, 0.45) 80%, transparent 100%)',
+    accent: 'radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.06) 0%, transparent 70%)',
   },
 }
 
