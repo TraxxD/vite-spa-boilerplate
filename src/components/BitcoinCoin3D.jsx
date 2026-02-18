@@ -160,11 +160,12 @@ function Coin({ dragging, dragRotation }) {
 }
 
 function Scene({ dragging, dragRotation }) {
-  const { scene } = useThree()
+  const { scene, gl } = useThree()
 
   useEffect(() => {
     scene.background = null
-  }, [scene])
+    gl.setClearColor(0x000000, 0)
+  }, [scene, gl])
 
   return (
     <>
