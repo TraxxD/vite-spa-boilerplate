@@ -81,6 +81,58 @@
   color: var(--white-20);
 }
 
+/* Disclaimer */
+.footer__disclaimer {
+  margin-top: 3rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 59, 59, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 59, 59, 0.03);
+}
+
+.footer__disclaimer-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--red);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.footer__disclaimer-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--red);
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
+}
+
+.footer__disclaimer-text {
+  font-size: 0.75rem;
+  color: var(--white-50);
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+}
+
+.footer__disclaimer-text:last-child {
+  margin-bottom: 0;
+}
+
+.footer__disclaimer-text strong {
+  color: var(--white-70);
+  font-weight: 600;
+}
+
+.footer__disclaimer-text--muted {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--white-20);
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .footer__grid {
     grid-template-columns: repeat(2, 1fr);
