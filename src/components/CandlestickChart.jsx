@@ -58,9 +58,11 @@ export default function CandlestickChart() {
           <span className="section-label">// live_market_feed</span>
           <h2 className="section-title">Trading View</h2>
         </motion.div>
+      </div>
 
+      <div className="candlestick__fullwidth">
         <motion.div
-          className="candlestick__card glass-card"
+          className="candlestick__card"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
