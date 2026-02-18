@@ -89,8 +89,8 @@
 }
 
 .footer__disclaimer-text {
-  font-size: 0.65rem;
-  color: var(--white-20);
+  font-size: 0.7rem;
+  color: var(--white);
   line-height: 1.7;
   text-align: center;
 }
