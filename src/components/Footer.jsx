@@ -80,31 +80,8 @@ export default function Footer() {
         </div>
 
         <div className="footer__disclaimer" id="disclaimer">
-          <div className="footer__disclaimer-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-              <line x1="12" y1="9" x2="12" y2="13" />
-              <line x1="12" y1="17" x2="12.01" y2="17" />
-            </svg>
-          </div>
-          <h4 className="footer__disclaimer-title">Risk Disclosure & Legal Disclaimer</h4>
           <p className="footer__disclaimer-text">
-            <strong>No Financial Advice:</strong> The information provided on this website and within our course materials is for educational and informational purposes only. Nothing on this site constitutes financial advice, investment advice, trading advice, or any other form of professional advice. You should not treat any of the content as such.
-          </p>
-          <p className="footer__disclaimer-text">
-            <strong>Investment Risk Warning:</strong> Cryptocurrency markets are highly volatile and carry significant risk. The value of Bitcoin and other digital assets can fluctuate dramatically, and you may lose some or all of your invested capital. Past performance is not indicative of future results. Never invest more than you can afford to lose.
-          </p>
-          <p className="footer__disclaimer-text">
-            <strong>No Guarantees:</strong> SATOSHI NOIR does not guarantee any specific outcomes or profits from the use of our educational materials. Any examples of past earnings or performance shown on this website are not guarantees that you will achieve similar results. Individual results will vary based on market conditions, experience, and effort.
-          </p>
-          <p className="footer__disclaimer-text">
-            <strong>Do Your Own Research:</strong> Before making any financial decisions, you should conduct your own due diligence and consult with a licensed financial advisor. We strongly recommend seeking independent financial advice that is tailored to your specific circumstances.
-          </p>
-          <p className="footer__disclaimer-text">
-            <strong>Regulatory Notice:</strong> Cryptocurrency regulations vary by jurisdiction. It is your responsibility to ensure compliance with all applicable laws and regulations in your country or region. SATOSHI NOIR is not registered as a securities broker-dealer or investment adviser with any financial regulatory authority.
-          </p>
-          <p className="footer__disclaimer-text footer__disclaimer-text--muted">
-            By using this website and purchasing any course materials, you acknowledge that you have read, understood, and agree to this disclaimer. You accept full responsibility for your own investment decisions and their outcomes.
+            The information provided on this website and in our courses is for educational and informational purposes only. Nothing presented constitutes financial, investment, legal, or tax advice. Cryptocurrency trading and investing involve significant risk. Prices are highly volatile, and you may lose part or all of your capital. Past performance does not guarantee future results. We do not provide personalized investment recommendations, and we are not registered financial advisors or brokers. You are solely responsible for your financial decisions. Before making any investment, you should conduct your own research and consult with a qualified financial professional. By purchasing or accessing our content, you acknowledge and accept these risks.
           </p>
         </div>
       </div>

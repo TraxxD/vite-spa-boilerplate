@@ -159,23 +159,6 @@ function Coin({ dragging, dragRotation }) {
   )
 }
 
-function GlowRing() {
-  const ringRef = useRef()
-
-  useFrame((state) => {
-    if (ringRef.current) {
-      ringRef.current.material.opacity = 0.12 + Math.sin(state.clock.elapsedTime * 1.5) * 0.05
-    }
-  })
-
-  return (
-    <mesh ref={ringRef} position={[0, 0, -1]}>
-      <ringGeometry args={[2.5, 3.5, 64]} />
-      <meshBasicMaterial color="#F7931A" transparent opacity={0.12} />
-    </mesh>
-  )
-}
-
 function Scene({ dragging, dragRotation }) {
   const { scene } = useThree()
 
@@ -191,7 +174,6 @@ function Scene({ dragging, dragRotation }) {
       <pointLight position={[0, 4, 4]} intensity={1.0} color="#ffd699" distance={15} />
       <pointLight position={[-3, -3, 2]} intensity={0.4} color="#F7931A" distance={12} />
       <pointLight position={[3, -2, -3]} intensity={0.3} color="#ffcc80" distance={10} />
-      <GlowRing />
       <Coin dragging={dragging} dragRotation={dragRotation} />
     </>
   )
