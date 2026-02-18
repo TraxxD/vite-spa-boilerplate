@@ -4,20 +4,20 @@ import './Resources.css'
 const resources = [
   {
     title: 'Learn Bitcoin',
-    description: 'Understand the technology, economics, and philosophy behind the world\'s first cryptocurrency.',
+    description: 'Go from "what is a blockchain?" to confidently explaining Bitcoin at dinner parties. The official getting-started guide trusted by millions.',
     cta: 'Start Learning',
     href: 'https://bitcoin.org/en/getting-started',
   },
   {
     title: 'Start Investing',
-    description: 'Ready to buy your first Bitcoin? Learn about wallets, exchanges, and best practices.',
-    cta: 'Get Started',
+    description: 'Every day you delay is another day of potential gains missed. Learn how to buy your first Bitcoin safely and store it like a pro.',
+    cta: 'Buy Your First BTC',
     href: 'https://bitcoin.org/en/buy',
   },
   {
     title: 'Security Guide',
-    description: 'Protect your investment. Learn about cold storage, seed phrases, and operational security.',
-    cta: 'Stay Safe',
+    description: 'Your Bitcoin is only as safe as your setup. Master cold storage, seed phrases, and operational security — because self-custody is true ownership.',
+    cta: 'Protect Your Wealth',
     href: 'https://bitcoin.org/en/secure-your-wallet',
   },
 ]
@@ -33,7 +33,10 @@ export default function Resources() {
           transition={{ duration: 0.6 }}
         >
           <span className="section-label">// get_started</span>
-          <h2 className="section-title">Resources</h2>
+          <h2 className="section-title">Free Resources to Get You Started</h2>
+          <p className="section-subtitle">
+            Not ready to commit? Start with these free, trusted resources. When you're ready to go deeper, our courses are waiting.
+          </p>
         </motion.div>
 
         <div className="resources__grid">

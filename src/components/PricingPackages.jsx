@@ -8,6 +8,8 @@ const packages = [
     name: 'Starter',
     price: 100,
     label: 'Begin Your Journey',
+    students: '2,400+',
+    ctaText: 'Start for $100',
     features: [
       'Introduction to Bitcoin fundamentals and blockchain technology',
       'Learn how to set up and secure your first crypto wallet',
@@ -20,8 +22,11 @@ const packages = [
     name: 'Professional',
     price: 250,
     label: 'Most Popular',
+    students: '5,100+',
+    ctaText: 'Unlock Pro Access',
     featured: true,
     features: [
+      'Everything in Starter, plus:',
       'Advanced technical analysis: candlestick patterns, indicators, and signals',
       'Portfolio management strategies and risk assessment frameworks',
       'DeFi deep-dive: yield farming, liquidity pools, and staking protocols',
@@ -34,7 +39,10 @@ const packages = [
     name: 'Elite',
     price: 550,
     label: 'Full Mastery',
+    students: '890+',
+    ctaText: 'Go Elite',
     features: [
+      'Everything in Professional, plus:',
       'Institutional-grade trading strategies and algorithmic trading basics',
       'Private 1-on-1 mentorship sessions with industry veterans',
       'Early access to market research reports and alpha signals',
@@ -100,7 +108,7 @@ export default function PricingPackages() {
             Invest in Your <span className="gold-text">Knowledge</span>
           </h2>
           <p className="section-subtitle">
-            Choose the package that matches your experience level. From beginner fundamentals to elite trading mastery.
+            The best-performing asset of the last decade deserves more than guesswork. Join 8,000+ students who turned confusion into confidence.
           </p>
         </motion.div>
 
@@ -123,6 +131,13 @@ export default function PricingPackages() {
               <div className="pricing__price">
                 <span className="pricing__currency">$</span>
                 <span className="pricing__amount mono">{pkg.price}</span>
+                <span className="pricing__price-note">one-time access</span>
+              </div>
+              <div className="pricing__social-proof">
+                <svg className="pricing__users-icon" viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                </svg>
+                <span className="pricing__students">{pkg.students} students enrolled</span>
               </div>
               <ul className="pricing__features">
                 {pkg.features.map((feature, j) => (
@@ -142,8 +157,9 @@ export default function PricingPackages() {
                 className={`pricing__cta ${pkg.featured ? 'pricing__cta--gold' : ''}`}
                 onClick={() => openModal(pkg)}
               >
-                Get Started
+                {pkg.ctaText}
               </MagneticButton>
+              <span className="pricing__guarantee">30-day money-back guarantee</span>
             </motion.div>
           ))}
         </div>

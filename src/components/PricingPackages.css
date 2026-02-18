@@ -109,6 +109,52 @@
   line-height: 1;
 }
 
+.pricing__price-note {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--white-30);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-left: 0.5rem;
+  align-self: flex-end;
+  padding-bottom: 0.4rem;
+}
+
+.pricing__social-proof {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(247, 147, 26, 0.06);
+  border-radius: 6px;
+  border: 1px solid rgba(247, 147, 26, 0.1);
+}
+
+.pricing__users-icon {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  color: var(--gold);
+}
+
+.pricing__students {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+
+.pricing__guarantee {
+  display: block;
+  text-align: center;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--white-30);
+  letter-spacing: 0.05em;
+}
+
 .pricing__features {
   display: flex;
   flex-direction: column;

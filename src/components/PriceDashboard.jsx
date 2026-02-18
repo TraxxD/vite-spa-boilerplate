@@ -40,6 +40,9 @@ export default function PriceDashboard({ currentPrice, change24h, historicalPric
         >
           <span className="section-label">// live_market_data</span>
           <h2 className="section-title">Price Dashboard</h2>
+          <p className="section-subtitle">
+            Real-time data. No delay, no middlemen. Watch the world's most volatile asset move — and learn to read the signals that matter.
+          </p>
         </motion.div>
 
         <motion.div

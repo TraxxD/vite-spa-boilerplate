@@ -10,6 +10,7 @@ import PricingPackages from './components/PricingPackages'
 import InvestmentCalculator from './components/InvestmentCalculator'
 import Timeline from './components/Timeline'
 import Resources from './components/Resources'
+import CtaBanner from './components/CtaBanner'
 import Footer from './components/Footer'
 import BitcoinCursor from './components/BitcoinCursor'
 import BitcoinParticles from './components/BitcoinParticles'
@@ -26,8 +27,10 @@ function MainPage({ data }) {
       <FeatureGrid />
       <Banner
         variant="gold"
-        title="Sound Money for a Digital World"
-        subtitle="In an era of unlimited money printing, Bitcoin offers mathematical certainty. 21 million — forever."
+        title="Your Bank Prints Money. Bitcoin Can't."
+        subtitle="Central banks have printed over $13 trillion since 2020. Meanwhile, Bitcoin's supply was coded in stone from day one. Which would you rather hold?"
+        ctaText="Explore Our Courses"
+        ctaTarget="pricing"
       />
       <PriceDashboard
         currentPrice={data.currentPrice}
@@ -43,11 +46,14 @@ function MainPage({ data }) {
       />
       <Banner
         variant="purple"
-        title="Every Block Tells a Story"
-        subtitle="From the genesis block to today, Bitcoin's blockchain is an immutable record of financial revolution."
+        title="Early Adopters Became Millionaires. Smart Learners Become the Next Ones."
+        subtitle="The people who understood Bitcoin early changed their lives forever. Our courses give you the same edge — the knowledge that separates spectators from participants."
+        ctaText="Start Learning Today"
+        ctaTarget="pricing"
       />
       <Timeline />
       <Resources />
+      <CtaBanner />
       <Footer />
     </div>
   )

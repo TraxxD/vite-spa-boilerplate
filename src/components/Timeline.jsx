@@ -133,6 +133,9 @@ export default function Timeline() {
         >
           <span className="section-label">// protocol_history</span>
           <h2 className="section-title">The Bitcoin Journey</h2>
+          <p className="section-subtitle">
+            From $0 to $100,000+ in 15 years. Every milestone was called "too late" by skeptics. The next chapter is unwritten — will you be in it?
+          </p>
         </motion.div>
 
         <div className="timeline__track" ref={trackRef}>
@@ -155,6 +158,27 @@ export default function Timeline() {
             </div>
           ))}
         </div>
+
+        <motion.div
+          className="timeline__conclusion"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <p className="timeline__conclusion-text">
+            At every milestone, people said it was too late. They were wrong every single time.
+          </p>
+          <button
+            className="timeline__conclusion-cta"
+            onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Don't Be Late This Time
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M4 9h10M10 5l4 4-4 4" />
+            </svg>
+          </button>
+        </motion.div>
       </div>
     </section>
   )

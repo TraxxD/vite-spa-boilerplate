@@ -107,6 +107,44 @@
   line-height: 1.7;
 }
 
+.timeline__conclusion {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.timeline__conclusion-text {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 600;
+  color: var(--white-70);
+  max-width: 500px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.timeline__conclusion-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--gold);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline__conclusion-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(247, 147, 26, 0.4);
+}
+
 @media (max-width: 768px) {
   .timeline__line {
     left: 20px;

@@ -12,7 +12,7 @@ const features = [
       </svg>
     ),
     title: 'Digital Gold',
-    description: 'A store of value for the digital age. Bitcoin\'s scarcity and durability make it the modern equivalent of precious metals.',
+    description: 'While fiat currencies lose purchasing power every year, Bitcoin holders have seen their wealth multiply. It\'s not just an asset — it\'s the hardest money ever created.',
   },
   {
     icon: (
@@ -25,7 +25,7 @@ const features = [
       </svg>
     ),
     title: 'Decentralized',
-    description: 'No single entity controls Bitcoin. A global network of nodes ensures transparency, security, and censorship resistance.',
+    description: 'No government, no CEO, no single point of failure. Over 50,000 nodes worldwide ensure no one can freeze your funds, censor your transactions, or inflate away your savings.',
   },
   {
     icon: (
@@ -37,7 +37,7 @@ const features = [
       </svg>
     ),
     title: 'Limited Supply',
-    description: 'Only 21 million Bitcoin will ever exist. This mathematical scarcity creates a deflationary asset unlike any fiat currency.',
+    description: 'Only 21 million will ever exist — and over 19.5 million are already mined. Every day you wait, the remaining supply shrinks. Mathematically scarce, permanently deflationary.',
   },
   {
     icon: (
@@ -49,7 +49,7 @@ const features = [
       </svg>
     ),
     title: 'Borderless',
-    description: 'Send value anywhere in the world, anytime. No intermediaries, no borders, no restrictions on financial freedom.',
+    description: 'Send $1 or $1 billion anywhere on Earth in minutes, 24/7, for a fraction of traditional fees. True financial sovereignty with no permission needed.',
   },
 ]
 
@@ -74,6 +74,9 @@ export default function FeatureGrid() {
         >
           <span className="section-label">// why_bitcoin</span>
           <h2 className="section-title">Built Different</h2>
+          <p className="section-subtitle">
+            Every other asset can be printed, diluted, or seized. Bitcoin can't. Here's why the world's sharpest investors are paying attention.
+          </p>
         </motion.div>
         <div className="features__grid">
           {features.map((feature, i) => (

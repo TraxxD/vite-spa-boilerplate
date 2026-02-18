@@ -41,7 +41,7 @@ export default function Hero({ currentPrice, change24h }) {
         >
           <span className="section-label">// digital_gold_standard</span>
           <h1 className="hero__title">
-            The Future<br />of <span className="gold-text">Value</span>
+            Don't Just Watch<br />History. <span className="gold-text">Own It.</span>
           </h1>
           <div className="hero__price">
             <span className={`hero__price-value mono ${pulse ? 'hero__price-value--pulse' : ''}`}>
@@ -55,27 +55,27 @@ export default function Hero({ currentPrice, change24h }) {
             )}
           </div>
           <p className="hero__description">
-            Bitcoin represents a fundamental shift in how the world thinks about money.
-            Scarce, decentralized, and borderless.
+            Bitcoin turned $100 into $75 million in 15 years. The next chapter is being written right now —
+            and the only question is whether you'll be part of it. Master the asset that's redefining wealth.
           </p>
           <div className="hero__actions">
             <MagneticButton
               className="hero__cta"
-              onClick={() => document.getElementById('dashboard')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              View Markets
+              Start Learning Now
             </MagneticButton>
             <MagneticButton
               className="hero__cta hero__cta--outline"
               onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Calculate Returns
+              See What You Missed
             </MagneticButton>
             <MagneticButton
               className="hero__cta hero__cta--outline"
-              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('dashboard')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Our Courses
+              Live Markets
             </MagneticButton>
           </div>
         </motion.div>

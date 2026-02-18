@@ -43,3 +43,42 @@
   margin: 0 auto;
   line-height: 1.7;
 }
+
+.banner__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.banner__cta:hover {
+  transform: translateY(-2px);
+}
+
+.banner__cta--gold {
+  background: var(--gold);
+  color: #000;
+  box-shadow: 0 4px 24px rgba(247, 147, 26, 0.3);
+}
+
+.banner__cta--gold:hover {
+  box-shadow: 0 8px 32px rgba(247, 147, 26, 0.45);
+}
+
+.banner__cta--purple {
+  background: #8b5cf6;
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.3);
+}
+
+.banner__cta--purple:hover {
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.45);
+}

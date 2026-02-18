@@ -100,7 +100,7 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
           <span className="section-label">// time_machine</span>
           <h2 className="section-title">What If You Invested?</h2>
           <p className="section-subtitle">
-            See how your investment would have grown over time.
+            This calculator shows the life-changing gains you could have made. The question isn't whether Bitcoin will keep growing — it's whether you'll be ready when it does.
           </p>
         </motion.div>
 
@@ -201,6 +201,23 @@ export default function InvestmentCalculator({ currentPrice, getPriceAtDate }) {
                   <span className={`calculator__result-value mono ${result.gain >= 0 ? 'calculator__result-value--green' : 'calculator__result-value--red'}`}>
                     {result.gain >= 0 ? '+' : ''}{result.gain.toFixed(1)}%
                   </span>
+                </div>
+                <div className="calculator__result-cta">
+                  <p className="calculator__result-cta-text">
+                    {result.gain > 0
+                      ? "Imagine catching the next move like this. Learn to spot opportunities before they happen."
+                      : "Markets move in cycles. Learn when to buy, hold, and take profit."
+                    }
+                  </p>
+                  <button
+                    className="calculator__result-cta-btn"
+                    onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    Learn to Trade with Confidence
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M3 8h10M9 4l4 4-4 4" />
+                    </svg>
+                  </button>
                 </div>
               </motion.div>
             )}
